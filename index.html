@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online tools for everyone. Generate passwords, QR codes, count words and convert text easily." />
+  <title>UtilityHub - Free Online Tools</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: '#6366f1'
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-white transition-colors">
+
+  <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur">
+    <nav class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+      <a href="#" class="text-2xl font-extrabold text-indigo-600">UtilityHub<span class="text-slate-800 dark:text-white">.</span></a>
+
+      <div class="flex items-center gap-3">
+        <button id="themeBtn" class="rounded-xl border px-3 py-2 dark:border-slate-700" aria-label="Toggle dark mode">🌙</button>
+        <a href="https://rameshjatav.github.io/portfolioWeb/" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-semibold text-sm">My Portfolio ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-gradient">
+      <div class="max-w-5xl mx-auto px-5 py-20 text-center">
+        <span class="inline-block rounded-full bg-indigo-100 text-indigo-700 px-4 py-2 text-sm font-bold mb-6">✨ Free Tools For Everyone</span>
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+          Your Everyday <span class="text-indigo-600">Tools</span>,<br /> All in One Place.
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-slate-600 dark:text-slate-300 text-lg">
+          Simple, fast and free online tools to make your daily work easier. No account required.
+        </p>
+        <a href="#tools" class="inline-block mt-8 bg-indigo-600 hover:bg-indigo-700 text-white px-7 py-3 rounded-xl font-bold shadow-lg shadow-indigo-500/20">Explore Tools ↓</a>
+      </div>
+    </section>
+
+    <section id="tools" class="max-w-6xl mx-auto px-5 py-14">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <p class="text-indigo-600 font-bold mb-2">OUR TOOLKIT</p>
+          <h2 class="text-3xl font-extrabold">Useful Free Tools</h2>
+        </div>
+        <input id="searchInput" type="search" placeholder="Search tools..." class="w-full sm:w-72 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div id="toolGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <article class="tool-card" data-name="word character counter text">
+          <div class="tool-icon">📝</div>
+          <h3 class="tool-title">Word Counter</h3>
+          <p class="tool-desc">Count words, characters and sentences in your text.</p>
+          <textarea id="counterText" rows="5" placeholder="Type or paste your text here..." class="tool-input"></textarea>
+          <div class="grid grid-cols-3 gap-2 mt-3 text-center">
+            <div class="stat"><strong id="words">0</strong><span>Words</span></div>
+            <div class="stat"><strong id="chars">0</strong><span>Characters</span></div>
+            <div class="stat"><strong id="sentences">0</strong><span>Sentences</span></div>
+          </div>
+          <button class="tool-btn" data-action="clear-counter">Clear Text</button>
+        </article>
+
+        <article class="tool-card" data-name="password generator security random">
+          <div class="tool-icon">🔐</div>
+          <h3 class="tool-title">Password Generator</h3>
+          <p class="tool-desc">Create a random password with your preferred length.</p>
+          <label for="passLength" class="block text-sm font-semibold mb-2">Password length: <span id="lengthValue">16</span></label>
+          <input id="passLength" type="range" min="8" max="40" value="16" class="w-full accent-indigo-600" />
+          <div class="flex gap-2 flex-wrap mt-4 text-sm">
+            <label><input id="passUpper" type="checkbox" checked /> ABC</label>
+            <label><input id="passLower" type="checkbox" checked /> abc</label>
+            <label><input id="passNumber" type="checkbox" checked /> 123</label>
+            <label><input id="passSymbol" type="checkbox" checked /> @#$</label>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <input id="passwordOutput" readonly class="tool-input min-w-0" placeholder="Your password..." />
+            <button id="copyPassword" class="bg-slate-200 dark:bg-slate-700 px-3 rounded-xl" aria-label="Copy password">📋</button>
+          </div>
+          <button id="generatePassword" class="tool-btn">Generate Password</button>
+        </article>
+
+        <article class="tool-card" data-name="qr code generator link url">
+          <div class="tool-icon">📱</div>
+          <h3 class="tool-title">QR Code Generator</h3>
+          <p class="tool-desc">Turn a website link or text into a scannable QR code.</p>
+          <input id="qrText" class="tool-input" placeholder="Enter text or website URL..." />
+          <button id="generateQR" class="tool-btn">Generate QR Code</button>
+          <div id="qrResult" class="qr-result" aria-live="polite"></div>
+          <p class="text-xs text-slate-500 mt-2">Uses an external QR code service.</p>
+        </article>
+
+        <article class="tool-card" data-name="text case converter uppercase lowercase title case">
+          <div class="tool-icon">🔠</div>
+          <h3 class="tool-title">Text Case Converter</h3>
+          <p class="tool-desc">Convert text to uppercase, lowercase or title case.</p>
+          <textarea id="caseText" rows="4" class="tool-input" placeholder="Enter your text..."></textarea>
+          <div class="grid grid-cols-2 gap-2 mt-3">
+            <button class="tool-btn" data-action="upper">UPPERCASE</button>
+            <button class="tool-btn" data-action="lower">lowercase</button>
+            <button class="tool-btn" data-action="title">Title Case</button>
+            <button class="tool-btn" data-action="copy-case">Copy Text</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-name="notes notepad save local">
+          <div class="tool-icon">📒</div>
+          <h3 class="tool-title">Quick Notes</h3>
+          <p class="tool-desc">Write notes and save them in this browser.</p>
+          <textarea id="notesText" rows="6" class="tool-input" placeholder="Write your notes here..."></textarea>
+          <div class="flex gap-2">
+            <button id="saveNotes" class="tool-btn">Save Notes</button>
+            <button id="clearNotes" class="tool-btn secondary-btn">Clear</button>
+          </div>
+          <p id="notesStatus" class="text-xs mt-3 text-slate-500" aria-live="polite">Notes stay in this browser.</p>
+        </article>
+
+        <article class="tool-card" data-name="developer about portfolio project">
+          <div class="tool-icon">👨‍💻</div>
+          <h3 class="tool-title">About Developer</h3>
+          <p class="tool-desc">A small project built to make everyday digital tasks easier for everyone.</p>
+          <div class="rounded-xl bg-indigo-50 dark:bg-slate-800 p-4 my-4">
+            <p class="font-bold">Ramesh Jatav</p>
+            <p class="text-sm text-slate-500 dark:text-slate-300 mt-1">Frontend Developer & Project Creator</p>
+          </div>
+          <a href="https://rameshjatav.github.io/portfolioWeb/" target="_blank" rel="noopener noreferrer" class="tool-btn block text-center">Visit My Portfolio ↗</a>
+        </article>
+
+      </div>
+      <p id="noResults" class="hidden text-center py-10 text-slate-500">No tools found. Try another search.</p>
+    </section>
+
+    <section class="bg-indigo-600 text-white">
+      <div class="max-w-4xl mx-auto px-5 py-12 text-center">
+        <h2 class="text-3xl font-extrabold">Simple tools. Useful results.</h2>
+        <p class="mt-3 text-indigo-100">Built for students, creators and everyday internet users.</p>
+        <a href="https://rameshjatav.github.io/portfolioWeb/" target="_blank" rel="noopener noreferrer" class="inline-block mt-6 bg-white text-indigo-700 font-bold rounded-xl px-6 py-3">Explore My Portfolio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center px-5 py-7 text-sm text-slate-500">
+    <p>© <span id="year"></span> UtilityHub. Made with ❤️ by Ramesh Jatav.</p>
+    <p class="mt-2">Free tools for everyone.</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
